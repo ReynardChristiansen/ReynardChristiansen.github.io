@@ -1,0 +1,57 @@
+body{
+    font-family: 'Courier New', Courier, monospace;
+    text-align:center;
+    color: white;
+}
+
+h1{
+    margin-bottom:30px;
+}
+
+*{
+    background-image: url(gambar.png);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#popUp{
+    display:none;
+}
+
+.tampil{
+    font-size:25px;
+    color:white;
+    display:flex;
+    position:relative;
+    border-color: white;
+    border-width:2px;
+    border-radius: 5px;
+    width: 150px;
+    height: 30px;
+    border-style:solid;
+    margin: auto;
+    top: -310px; 
+    background-color:pink;
+    font-weight: bold;
+}
+
+#tes{
+    font-weight: bold;
+    font-size:25px;
+}
+
+.header{
+    color:white;
+    font-size: 20px;
+}
+
+.tombol{
+    cursor: pointer;
+    width:150px;
+    height:50px;
+    border-radius: 10px;
+    color:white;
+    font-size:25px;
+    font-weight: bold;
+}
+
+
