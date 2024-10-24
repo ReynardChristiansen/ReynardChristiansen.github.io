@@ -2,6 +2,10 @@
 ## Snake Game
 
 Welcome to the Snake Game website! This game offers a classic and addictive gameplay experience where you control a snake, maneuvering it around the screen to eat food and grow longer. Be careful not to collide with the walls or your own body, or it's game over!
+
+
+![image alt](https://reynardchristiansen.github.io/porto/assets/project-4.jpg)
+
 ## Gameplay
 
 Controls:
