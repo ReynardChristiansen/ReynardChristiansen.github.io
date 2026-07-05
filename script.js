@@ -14,6 +14,25 @@
     const WIN_LENGTH = GRID * GRID;  // fill the board = win
     const BEST_KEY = "snake.best";
 
+    // ---- skins (head + body color; stored in localStorage) ----
+    const SKIN_KEY  = "snake.skin";       // selected skin id
+    const SKINS = [
+        { id: "neon",   name: "Neon",   head: "#cdf5e9", body: "#2ed6ad" },
+        { id: "solar",  name: "Solar",  head: "#fff0c2", body: "#ffb23e" },
+        { id: "vapor",  name: "Vapor",  head: "#ffd9f4", body: "#ff5fd0" },
+        { id: "toxic",  name: "Toxic",  head: "#eaffb0", body: "#9ade1f" },
+        { id: "ember",  name: "Ember",  head: "#ffd2c2", body: "#ff5470" },
+        { id: "ice",    name: "Ice",    head: "#dff4ff", body: "#49b8ff" },
+    ];
+
+    const hexToRgb = (hex) => {
+        const n = parseInt(hex.slice(1), 16);
+        return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+    };
+
+    // load the saved skin (falls back to the first preset)
+    let skin = SKINS.find(s => s.id === localStorage.getItem(SKIN_KEY)) || SKINS[0];
+
     // ============================================================
     //  Sound engine — Web Audio, synthesized (no external files)
     // ============================================================
@@ -138,6 +157,7 @@
         Sound.start();
         reset();
         state = "running";
+        syncSkinBtn();
         hideOverlay();
         lastStep = performance.now();
         startRAF();
@@ -202,6 +222,7 @@
 
     function gameOver() {
         state = "over";
+        syncSkinBtn();
         Sound.over();
         const isBest = score > best && score > 0;
         saveBest();
@@ -212,6 +233,7 @@
 
     function youWin() {
         state = "win";
+        syncSkinBtn();
         Sound.win();
         saveBest();
         showOverlay("win", "You Win!", "Perfect Board",
@@ -268,16 +290,17 @@
         }
 
         // snake (draw tail→head so the head sits on top)
+        const b = hexToRgb(skin.body);
         for (let i = snake.length - 1; i >= 0; i--) {
             const p = segXY(i, t);
             const shade = snake.length > 1 ? i / (snake.length - 1) : 0; // head→tail
             const isHead = i === 0;
             ctx.save();
-            ctx.shadowColor = "rgba(52, 245, 197, 0.4)";
+            ctx.shadowColor = `rgba(${b.r}, ${b.g}, ${b.b}, 0.4)`;
             ctx.shadowBlur = isHead ? cell * 0.28 : 0;
             ctx.fillStyle = isHead
-                ? "#cdf5e9"
-                : `rgba(46, 214, 173, ${0.92 - shade * 0.5})`;
+                ? skin.head
+                : `rgba(${b.r}, ${b.g}, ${b.b}, ${0.92 - shade * 0.5})`;
             roundRect(p.x + 1.5, p.y + 1.5, cell - 3, cell - 3, cell * 0.28);
             ctx.fill();
             ctx.restore();
@@ -380,11 +403,13 @@
     function togglePause() {
         if (state === "running") {
             state = "paused";
+            syncSkinBtn();           // unlock skins while paused
             stopRAF();
             draw(1);                 // snap to grid so it doesn't freeze mid-slide
             showOverlay("paused", "Paused", "Take a breath", "Space or Resume to continue.", "Resume");
         } else if (state === "paused") {
             state = "running";
+            syncSkinBtn();           // lock again on resume
             hideOverlay();
             lastStep = performance.now();
             startRAF();
@@ -425,6 +450,56 @@
     soundBtn.addEventListener("click", () => {
         const muted = Sound.toggle();
         soundBtn.setAttribute("aria-pressed", muted ? "false" : "true");
+    });
+
+    /* ---------- skin picker ---------- */
+    const skinBtn   = document.getElementById("skinBtn");
+    const skinModal = document.getElementById("skinModal");
+    const skinGrid  = document.getElementById("skinGrid");
+
+    // build one card per preset skin
+    SKINS.forEach(s => {
+        const card = document.createElement("button");
+        card.className = "skin-card";
+        card.dataset.skin = s.id;
+        card.setAttribute("role", "option");
+        card.innerHTML =
+            `<span class="skin-card__preview">
+                <span class="skin-card__dot skin-card__dot--head" style="background:${s.head};color:${s.body}"></span>
+                <span class="skin-card__dot" style="background:${s.body}"></span>
+             </span>
+             <span>${s.name}</span>`;
+        card.addEventListener("click", () => applySkin(s));
+        skinGrid.appendChild(card);
+    });
+
+    function markSelected() {
+        skinGrid.querySelectorAll(".skin-card").forEach(c =>
+            c.setAttribute("aria-selected", c.dataset.skin === skin.id ? "true" : "false"));
+    }
+
+    function applySkin(s) {
+        skin = s;
+        localStorage.setItem(SKIN_KEY, s.id);
+        markSelected();
+        draw(state === "running" ? undefined : 1);
+    }
+
+    // skins can only be changed while NOT actively playing
+    function syncSkinBtn() { skinBtn.disabled = state === "running"; }
+
+    function openSkins() {
+        if (state === "running") return;   // guard: locked during play
+        markSelected();
+        skinModal.hidden = false;
+    }
+    function closeSkins() { skinModal.hidden = true; }
+
+    skinBtn.addEventListener("click", openSkins);
+    skinModal.querySelectorAll("[data-close]").forEach(el =>
+        el.addEventListener("click", closeSkins));
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !skinModal.hidden) closeSkins();
     });
 
     /* ---------- boot ---------- */
