@@ -14,7 +14,8 @@ touch-friendly, and crisp on retina displays.
   on the board.
 - **Synthesized sound** — eat, turn, game-over, and win effects generated with
   the Web Audio API (no audio files). Toggle mute any time — your choice is saved.
-- **High score** — your best run is stored locally and persists between sessions.
+- **High score** — your best run is stored locally and persists between sessions;
+  beating it is highlighted on the game-over screen.
 - **Steady pace** — a constant, predictable speed (150 ms per step) — no
   ramp-up, so the challenge comes from your length, not from panic.
 - **Modern UI** — glassmorphism, subtle neon accents, and an animated background.

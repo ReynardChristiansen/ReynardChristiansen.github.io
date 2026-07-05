@@ -206,6 +206,15 @@ body {
     margin-bottom: 8px;
 }
 .overlay__text { color: var(--text-dim); font-size: 15px; margin-bottom: 20px; }
+.overlay__text .hl {
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: 1.7em;
+    color: var(--gold);
+    margin-left: 4px;
+    vertical-align: -1px;
+    text-shadow: 0 0 18px rgba(255, 210, 87, 0.55);
+}
 
 /* gradient title on the start screen only (over/win keep their solid colors) */
 .overlay[data-state="start"] .overlay__title {

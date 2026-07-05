@@ -206,7 +206,7 @@
         const isBest = score > best && score > 0;
         saveBest();
         showOverlay("over", "Game Over", "Nice run!",
-            isBest ? `New personal best — ${score}! 🏆` : "So close — give it another go.",
+            isBest ? `New personal best <span class="hl">${score}</span>` : "So close — give it another go.",
             "Play Again");
     }
 
@@ -332,7 +332,7 @@
         overlay.dataset.state = st;
         oTitle.textContent = title;
         oBadge.textContent = badge;
-        oText.textContent = text;
+        oText.innerHTML = text;
         primaryLabel.textContent = btn;
         overlay.classList.add("is-visible");
     }
