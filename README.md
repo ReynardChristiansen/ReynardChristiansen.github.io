@@ -1,8 +1,7 @@
-# 🐍 Hyper Snake
+# Hyper Snake
 
-A modern, neon-themed remake of the classic Snake game — built with **vanilla
-HTML, CSS, and JavaScript** (zero dependencies). Smooth, responsive,
-touch-friendly, and crisp on retina displays.
+The classic Snake game, rebuilt with vanilla HTML, CSS, and JavaScript.
+Runs in the browser, works with keyboard or touch.
 
 <p align="center">
   <img src="assets/hyper-snake.gif" alt="Hyper Snake gameplay" width="440">
@@ -13,21 +12,12 @@ touch-friendly, and crisp on retina displays.
   <a href="https://reynardchristiansen.github.io/">🎮 Play it live</a>
 </p>
 
-## ✨ Features
+## Features
 
-- **Buttery-smooth motion** — the snake glides between cells via
-  `requestAnimationFrame` interpolation, while game logic stays on a fixed grid.
-- **Retro D-pad on mobile** — a raised, engraved cross-pad; plus swipe controls
-  on the board.
-- **Synthesized sound** — eat, turn, game-over, and win effects generated with
-  the Web Audio API (no audio files). Toggle mute any time — your choice is saved.
-- **High score** — your best run is stored locally and persists between sessions;
-  beating it is highlighted on the game-over screen.
-- **Steady pace** — a constant, predictable speed (150 ms per step) — no
-  ramp-up, so the challenge comes from your length, not from panic.
-- **Modern UI** — glassmorphism, subtle neon accents, and an animated background.
-- **Crisp rendering** — device-pixel-ratio aware canvas for sharp visuals.
-- **Fully responsive** — one layout that adapts from desktop to phone.
+- Smooth, interpolated snake movement
+- Keyboard, touch D-pad, and swipe controls
+- High score saved locally
+- Sound effects with a mute toggle
 
 ## 🎮 Controls
 
@@ -47,13 +37,6 @@ Fill the entire **15 × 15** board (225 cells) to win!
 Play online: **https://reynardchristiansen.github.io/**
 
 Or run locally — just open `index.html` in any modern browser.
-
-## 🛠️ Built With
-
-- Vanilla JavaScript (canvas rendering + fixed-timestep game loop)
-- CSS (glassmorphism, responsive layout, retro D-pad)
-- Web Audio API for sound
-- `localStorage` for the high score
 
 ## 💬 Feedback
 
