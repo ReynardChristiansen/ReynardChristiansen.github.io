@@ -4,7 +4,14 @@ A modern, neon-themed remake of the classic Snake game — built with **vanilla
 HTML, CSS, and JavaScript** (zero dependencies). Smooth, responsive,
 touch-friendly, and crisp on retina displays.
 
-![Hyper Snake](https://reynardchristiansen.github.io/porto/assets/project-4.jpg)
+<p align="center">
+  <img src="assets/hyper-snake.gif" alt="Hyper Snake gameplay" width="440">
+</p>
+
+<p align="center">
+  <a href="assets/hyper-snake.mp4">▶ Watch the MP4</a> ·
+  <a href="https://reynardchristiansen.github.io/">🎮 Play it live</a>
+</p>
 
 ## ✨ Features
 
