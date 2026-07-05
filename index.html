@@ -2,30 +2,122 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Hyper Snake — a modern, neon snake game. Play with arrow keys, WASD, or touch. Chase your high score!">
+    <meta name="theme-color" content="#0a0a1a">
+    <title>Hyper Snake</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <link rel="mask-icon" href="favicon.svg" color="#16d3a5">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
-
-    <div class="header">
-        <div class="snake">
-            <h1>Snake</h1>
-        </div>
-    </div>
-   
-    <canvas id="board"></canvas>
-
-    <div id = "popUp" class="tampil">You Lose</div>
-
-    <div>
-        <p id="tes"></p> 
+    <div class="bg-orbs" aria-hidden="true">
+        <span class="orb orb--1"></span>
+        <span class="orb orb--2"></span>
+        <span class="orb orb--3"></span>
     </div>
 
-    
-    <button onclick ="window.location.reload()" class="tombol">Restart</button> 
+    <main class="app">
+        <header class="topbar">
+            <div class="brand">
+                <span class="brand__logo" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <g fill="#05271d">
+                            <rect x="2.6" y="9.5" width="5" height="5" rx="1.6"/>
+                            <rect x="8.3" y="9.5" width="5" height="5" rx="1.6"/>
+                            <rect x="14"  y="9.5" width="5" height="5" rx="1.6"/>
+                        </g>
+                        <circle cx="17.3" cy="11.4" r="0.9" fill="#4defc0"/>
+                        <circle cx="21.1" cy="12"   r="1.7" fill="#05271d"/>
+                    </svg>
+                </span>
+                <div class="brand__text">
+                    <h1>Hyper Snake</h1>
+                    <p>Neon Edition</p>
+                </div>
+            </div>
+
+            <div class="scores">
+                <div class="stat-group">
+                    <div class="stat">
+                        <span class="stat__label">Score</span>
+                        <span class="stat__value" id="score">0</span>
+                    </div>
+                    <div class="stat stat--best">
+                        <span class="stat__label">Best</span>
+                        <span class="stat__value" id="best">0</span>
+                    </div>
+                </div>
+                <button class="sound-toggle" id="soundBtn" aria-label="Toggle sound" aria-pressed="true">
+                    <svg class="ic ic--on" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 5 6 9H2v6h4l5 4V5z"/>
+                        <path d="M15.5 8.5a5 5 0 0 1 0 7"/>
+                        <path d="M19 5a9 9 0 0 1 0 14"/>
+                    </svg>
+                    <svg class="ic ic--off" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 5 6 9H2v6h4l5 4V5z"/>
+                        <path d="m23 9-6 6"/><path d="m17 9 6 6"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <section class="stage">
+            <div class="board-wrap">
+                <canvas id="board" role="img" aria-label="Snake game board">
+                    Your browser does not support the game canvas.
+                </canvas>
+
+                <!-- Overlay: start / pause / game over / win -->
+                <div class="overlay is-visible" id="overlay" data-state="start">
+                    <div class="overlay__card">
+                        <div class="overlay__badge" id="overlayBadge">Ready?</div>
+                        <h2 class="overlay__title" id="overlayTitle">Hyper Snake</h2>
+                        <p class="overlay__text" id="overlayText">
+                            How long can you last?
+                        </p>
+
+                        <button class="btn btn--primary" id="primaryBtn">
+                            <svg class="btn__ic" viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            <span id="primaryLabel">Play</span>
+                        </button>
+
+                        <div class="overlay__hint">
+                            <span class="controls__label">Move</span>
+                            <span class="controls__stack">
+                                <span class="keys"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span>
+                                <span class="controls__or">or</span>
+                                <span class="keys"><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd></span>
+                            </span>
+                            <span class="controls__label">Pause</span>
+                            <span class="keys"><kbd>Space</kbd></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mobile / touch controls: retro D-pad -->
+        <nav class="dpad" aria-label="Touch controls">
+            <div class="dpad__cross">
+                <button class="dpad__btn dpad__up"    data-dir="up"    aria-label="Move up"></button>
+                <button class="dpad__btn dpad__left"  data-dir="left"  aria-label="Move left"></button>
+                <span class="dpad__hub" aria-hidden="true"></span>
+                <button class="dpad__btn dpad__right" data-dir="right" aria-label="Move right"></button>
+                <button class="dpad__btn dpad__down"  data-dir="down"  aria-label="Move down"></button>
+            </div>
+        </nav>
+
+        <footer class="foot">
+            <span class="foot__meta">© 2026 Reynard Christiansen · Hyper Snake</span>
+        </footer>
+    </main>
 
     <script src="script.js"></script>
 </body>

@@ -1,29 +1,56 @@
+# 🐍 Hyper Snake
 
-## Snake Game
+A modern, neon-themed remake of the classic Snake game — built with **vanilla
+HTML, CSS, and JavaScript** (zero dependencies). Smooth, responsive,
+touch-friendly, and crisp on retina displays.
 
-Welcome to the Snake Game website! This game offers a classic and addictive gameplay experience where you control a snake, maneuvering it around the screen to eat food and grow longer. Be careful not to collide with the walls or your own body, or it's game over!
+![Hyper Snake](https://reynardchristiansen.github.io/porto/assets/project-4.jpg)
 
+## ✨ Features
 
-![image alt](https://reynardchristiansen.github.io/porto/assets/project-4.jpg)
+- **Buttery-smooth motion** — the snake glides between cells via
+  `requestAnimationFrame` interpolation, while game logic stays on a fixed grid.
+- **Retro D-pad on mobile** — a raised, engraved cross-pad; plus swipe controls
+  on the board.
+- **Synthesized sound** — eat, turn, game-over, and win effects generated with
+  the Web Audio API (no audio files). Toggle mute any time — your choice is saved.
+- **High score** — your best run is stored locally and persists between sessions.
+- **Steady pace** — a constant, predictable speed (150 ms per step) — no
+  ramp-up, so the challenge comes from your length, not from panic.
+- **Modern UI** — glassmorphism, subtle neon accents, and an animated background.
+- **Crisp rendering** — device-pixel-ratio aware canvas for sharp visuals.
+- **Fully responsive** — one layout that adapts from desktop to phone.
 
-## Gameplay
+## 🎮 Controls
 
-Controls:
+| Action | Desktop | Mobile |
+|--------|---------|--------|
+| Move   | `↑ ↓ ← →` or `W A S D` | Retro D-pad or swipe |
+| Pause / Resume | `Space` | — |
+| Start / Restart | **Play / Play Again** button | tap **Play / Play Again** |
 
-- Use the arrow keys (Up, Down, Left, Right) or WASD keys to control the movement of the snake.
+## 🎯 Objective
 
-Objective:
+Eat the glowing food to grow longer. Avoid the walls and your own body.
+Fill the entire **15 × 15** board (225 cells) to win!
 
-- Eat the food (displayed as a dot) to grow longer. Avoid colliding with the walls or your own body.
+## ▶️ How to Play
 
-Scoring:
+Play online: **https://reynardchristiansen.github.io/**
 
-- Each food eaten increases the length of the snake. Try to achieve the highest score possible by eating as much food as you can without crashing.
-## How to Play
+Or run locally — just open `index.html` in any modern browser.
 
-Access the Game: Visit the following URL to play the Snake Game:
+## 🛠️ Built With
 
-- https://reynardchristiansen.github.io/
-## Feedback
+- Vanilla JavaScript (canvas rendering + fixed-timestep game loop)
+- CSS (glassmorphism, responsive layout, retro D-pad)
+- Web Audio API for sound
+- `localStorage` for the high score
 
-If you have any feedback, please reach out to me at reynard.satria@gmail.com
+## 💬 Feedback
+
+Reach out at reynard.satria@gmail.com
+
+---
+
+© 2026 Reynard Christiansen · Hyper Snake
