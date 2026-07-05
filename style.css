@@ -250,8 +250,9 @@ body {
 .keys { display: inline-flex; gap: 5px; justify-self: start; }
 .controls__or { color: var(--text-dim); opacity: 0.55; font-size: 12px; }
 
-/* show the controls hint only on the start screen */
-.overlay[data-state="start"] .overlay__hint  { display: grid; }
+/* The keyboard hint is shown only on desktop (with a keyboard) — see the
+   media query below. On mobile the on-screen D-pad is the control, so the
+   hint stays hidden (its base display is none). */
 
 /* state color accents */
 .overlay[data-state="over"] .overlay__badge { color: var(--danger); border-color: rgba(255,84,112,0.4); }
@@ -401,11 +402,13 @@ kbd {
 }
 
 /* ============================================================
-   Responsive: hide d-pad on desktop-ish pointers with keyboards
-   but keep it for touch — show always ≤640px, optional above.
+   Responsive: on desktop (keyboard + fine pointer, wide) show the
+   keyboard hint and hide the touch D-pad. On mobile it's the reverse:
+   the D-pad is the control, and the keyboard hint stays hidden.
    ============================================================ */
 @media (hover: hover) and (pointer: fine) and (min-width: 641px) {
     .dpad { display: none; }
+    .overlay[data-state="start"] .overlay__hint { display: grid; }
 }
 
 /* keep the header on one tidy row on small phones */
