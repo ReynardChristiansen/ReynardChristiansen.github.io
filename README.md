@@ -1,8 +1,8 @@
+# Hyper Snake
+
 <p align="center">
   <img src="assets/cover.png" alt="Hyper Snake" width="100%">
 </p>
-
-# Hyper Snake
 
 The classic Snake game, rebuilt with vanilla HTML, CSS, and JavaScript.
 Runs in the browser, works with keyboard or touch.
